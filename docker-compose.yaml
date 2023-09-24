@@ -1,0 +1,43 @@
+version: "3.7"
+services:
+  bpms_app:
+    image: jboss/jbpm-server-full
+    container_name: bpms
+    restart: always
+    environment:
+      - JBPM_DB_DRIVER=mysql
+      - JBPM_DB_HOST=bpms_db
+      - JBPM_DB_PORT=3306
+      - JBPM_DB_NAME=bpms
+      - JBPM_DB_USER=bpms
+      - JBPM_DB_PASSWORD=bpms
+    depends_on:
+      - bpms_db
+    ports:
+      - 8080:8080
+      - 8001:8001
+    networks:
+      - bpms-network
+  
+  bpms_db:
+    image: mysql
+    container_name: bpms-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=toor
+      - MYSQL_DATABASE=bpms
+      - MYSQL_USER=bpms
+      - MYSQL_PASSWORD=bpms
+    volumes:
+      - ./database:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - bpms-network
+
+volumes:
+  database: {}
+
+networks:
+  bpms-network:
+    external: true
