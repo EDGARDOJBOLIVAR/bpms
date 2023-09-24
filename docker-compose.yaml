@@ -5,9 +5,9 @@ services:
     container_name: bpms
     restart: always
     environment:
-      - JBPM_DB_DRIVER=mysql
+      - JBPM_DB_DRIVER=postgres
       - JBPM_DB_HOST=bpms_db
-      - JBPM_DB_PORT=3306
+      - JBPM_DB_PORT=5432
       - JBPM_DB_NAME=bpms
       - JBPM_DB_USER=bpms
       - JBPM_DB_PASSWORD=bpms
@@ -18,20 +18,20 @@ services:
       - 8001:8001
     networks:
       - bpms-network
-  
+
   bpms_db:
-    image: mysql
+    image: postgres
     container_name: bpms-db
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=toor
-      - MYSQL_DATABASE=bpms
-      - MYSQL_USER=bpms
-      - MYSQL_PASSWORD=bpms
+      - POSTGRES_DB=bpms
+      - POSTGRES_USER=bpms
+      - POSTGRES_PASSWORD=bpms
+      - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - ./database:/var/lib/mysql
+      - ./database:/var/lib/postgresql/data
     ports:
-      - 3306:3306
+      - 5432:5432
     networks:
       - bpms-network
 
