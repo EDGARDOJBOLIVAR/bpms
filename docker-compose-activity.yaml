@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  bpms_app:
+    image: alfresco/process-services
+    container_name: bpms
+    restart: always
+    ports:
+      - 80:8080
+    networks:
+      - bpms-network
+
+networks:
+  bpms-network:
+    external: true
