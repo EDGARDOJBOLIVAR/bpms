@@ -39,7 +39,6 @@ services:
 
 volumes:
   database: {}
-  bpms_activos: {}
 
 networks:
   bpms-network:
