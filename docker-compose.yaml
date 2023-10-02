@@ -11,6 +11,8 @@ services:
       - JBPM_DB_NAME=bpms
       - JBPM_DB_USER=bpms
       - JBPM_DB_PASSWORD=bpms
+    volumes:
+      - ./bpms_activos:/opt/jboss/wildfly/bin/.niogit:Z
     depends_on:
       - bpms_db
     ports:
@@ -37,6 +39,7 @@ services:
 
 volumes:
   database: {}
+  bpms_activos: {}
 
 networks:
   bpms-network:
