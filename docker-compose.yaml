@@ -13,6 +13,7 @@ services:
       - JBPM_DB_PASSWORD=bpms
     volumes:
       - ./bpms_activos:/opt/jboss/wildfly/bin/.niogit:Z
+      - ./config/standalone.xml:/opt/jboss/wildfly/standalone/configuration/standalone.xml:Z
     depends_on:
       - bpms_db
     ports:
